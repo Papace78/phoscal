@@ -26,7 +26,8 @@ def clean(
     force: bool = Option(False, "-f", "--force", help="Don't prompt for confirmation"),
 ):
     cleaner = Cleaner(directory)
-    extension_file_mapping = cleaner.build_extension_file_mapping(os.listdir(directory))
+    all_files_in_dir = cleaner.list_all_files_in_dir()
+    extension_file_mapping = cleaner.build_extension_file_mapping(all_files_in_dir)
     orphans = cleaner.find_orphans(extension_file_mapping, ext)
     files_to_delete = cleaner.list_files_to_delete(orphans)
 
@@ -57,7 +58,8 @@ def list_orphans(
     ),
 ):
     cleaner = Cleaner(directory)
-    extension_file_mapping = cleaner.build_extension_file_mapping(os.listdir(directory))
+    all_files_in_dir = cleaner.list_all_files_in_dir()
+    extension_file_mapping = cleaner.build_extension_file_mapping(all_files_in_dir)
     orphans = cleaner.find_orphans(extension_file_mapping, ext)
     for _, files in orphans.items():
         for file in files:

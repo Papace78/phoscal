@@ -52,3 +52,11 @@ class Cleaner:
         for file in files_to_delete:
             full_path = os.path.join(self.dir_path, file.filename)
             os.remove(full_path)
+
+    def list_all_files_in_dir(self) -> list[str]:
+        return [
+            *filter(
+                lambda f: os.path.isfile(os.path.join(self.dir_path, f)),
+                os.listdir(self.dir_path),
+            )
+        ]
