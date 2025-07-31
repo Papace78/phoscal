@@ -45,7 +45,7 @@ class Cleaner:
         return orphans
 
     @staticmethod
-    def list_files_to_delete(orphans: dict[str, list[File]]) -> list[str]:
+    def list_files_to_delete(orphans: dict[str, list[File]]) -> list[File]:
         return [file for _, files in orphans.items() for file in files]
 
     def delete_files(self, files_to_delete: list[File]) -> None:
