@@ -36,11 +36,15 @@ def test_find_orphans_raises():
 
 
 def test_list_files_to_delete():
-    orphans = {".jpg": [], ".raw": [File("P2.RAW")], ".png": [File("P10.png"), File("P45.PNG")]}
+    orphans = {
+        ".jpg": [],
+        ".raw": [File("P2.RAW")],
+        ".png": [File("P10.png"), File("P45.PNG")],
+    }
     expected = [
-        File('P2.RAW'),
-        File('P10.png'),
-        File('P45.PNG'),
+        File("P2.RAW"),
+        File("P10.png"),
+        File("P45.PNG"),
     ]
     actual = Cleaner.list_files_to_delete(orphans)
     assert actual == expected
