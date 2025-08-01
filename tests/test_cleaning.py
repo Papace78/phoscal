@@ -1,5 +1,7 @@
 import pytest
+
 from phoscal.cleaning import Cleaner, File
+from phoscal.exceptions import FileExtensionNotFound
 
 
 def test_build_extension_file_mapping():
@@ -23,12 +25,26 @@ def test_find_orphans():
     assert actual == expected
 
 
+def test_find_orphans_raises():
+    ext_file_mapping = {
+        ".jpg": [File("P1.jPg"), File("P3.jpg")],
+        ".raw": [File("P1.raw"), File("P2.RAW"), File("P3.raw")],
+    }
+    ref_file_ext = ".unknown"
+    with pytest.raises(ValueError):
+        _ = Cleaner.find_orphans(ext_file_mapping, ref_file_ext)
+
+
 def test_list_files_to_delete():
-    orphans = {".jpg": [], ".raw": [File("P2.RAW")], ".png": [File("P10.png"), File("P45.PNG")]}
+    orphans = {
+        ".jpg": [],
+        ".raw": [File("P2.RAW")],
+        ".png": [File("P10.png"), File("P45.PNG")],
+    }
     expected = [
-        File('P2.RAW'),
-        File('P10.png'),
-        File('P45.PNG'),
+        File("P2.RAW"),
+        File("P10.png"),
+        File("P45.PNG"),
     ]
     actual = Cleaner.list_files_to_delete(orphans)
     assert actual == expected

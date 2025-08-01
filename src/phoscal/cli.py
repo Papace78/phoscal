@@ -8,7 +8,6 @@ from phoscal.cleaning import Cleaner
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
 
-
 @app.command()
 def clean(
     directory: str = Option(
@@ -34,7 +33,12 @@ def clean(
     do_delete = True
     if not force:
         typer.echo("You are about to delete: ")
-        typer.echo(json.dumps({ext: [f.filename for f in files] for ext, files in orphans.items() }, indent=2))
+        typer.echo(
+            json.dumps(
+                {ext: [f.filename for f in files] for ext, files in orphans.items()},
+                indent=2,
+            )
+        )
         do_delete = typer.confirm("Are you sure ?")
 
     if do_delete:
