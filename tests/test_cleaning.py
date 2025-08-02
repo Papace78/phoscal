@@ -31,7 +31,7 @@ def test_find_orphans_raises():
         ".raw": [File("P1.raw"), File("P2.RAW"), File("P3.raw")],
     }
     ref_file_ext = ".unknown"
-    with pytest.raises(ValueError):
+    with pytest.raises(FileExtensionNotFound):
         _ = Cleaner.find_orphans(ext_file_mapping, ref_file_ext)
 
 
