@@ -24,3 +24,7 @@ dev = [
     "ipython>=9.4.0",
     "pytest>=8.4.1",
 ]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
