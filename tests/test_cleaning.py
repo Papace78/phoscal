@@ -48,3 +48,7 @@ def test_list_files_to_delete():
     ]
     actual = Cleaner.list_files_to_delete(orphans)
     assert actual == expected
+
+
+def test_assert_true_is_false():
+    assert False
