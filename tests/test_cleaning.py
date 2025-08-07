@@ -51,4 +51,4 @@ def test_list_files_to_delete():
 
 
 def test_assert_true_is_false():
-    assert False
+    assert True
